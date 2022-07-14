@@ -9,6 +9,7 @@ public interface JugadorService {
 	public Jugador crearJugador(Jugador jugador);
 	public Jugador existeixNomJugador(Jugador jugador);
 	public List<Jugador> llistaJugadors();
+	public Jugador obtenirJugadorPerID(Integer idJugador);
 
 
 }

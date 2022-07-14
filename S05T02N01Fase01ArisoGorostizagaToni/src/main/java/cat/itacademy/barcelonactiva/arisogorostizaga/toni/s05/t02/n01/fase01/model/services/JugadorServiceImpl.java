@@ -38,6 +38,11 @@ public class JugadorServiceImpl implements JugadorService {
 		return (List<Jugador>) jugadorRepository.findAll();
 	}
 
+	@Override
+	public Jugador obtenirJugadorPerID(Integer idJugador) {
+		return jugadorRepository.findById(idJugador).orElse(null);
+	}
+
 
 
 
