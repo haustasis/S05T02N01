@@ -17,14 +17,35 @@ public class JugadorServiceImpl implements JugadorService {
 
 	@Override
 	public Jugador crearJugador(Jugador jugador) {
-		return jugadorRepository.save(existeixNomJugador(jugador));
+		return jugadorRepository.save(jugador);
 	}
 
 	@Override
 	public Jugador existeixNomJugador(Jugador jugador) {
+		List<Jugador>list=jugadorRepository.findAll();
+		for(Jugador p:list) {
+			if((p.getNomJugador().equalsIgnoreCase(jugador.getNomJugador())) || ((jugador.getNomJugador().equalsIgnoreCase("")))) {
+				jugador.setNomJugador("ANÒNIM");
+
+			}
+			
+		}
+		return jugador;
+	}
+	
+	
+	
+
+	/*
+	@Override
+	public Jugador existeixNomJugador(Jugador jugador) {
 		
-		if(jugador.getNomJugador().equalsIgnoreCase("")) {
+		if(jugador.getNomJugador() == null) {
 			jugador.setNomJugador("ANÒNIM");
+		}
+		
+		if(jugador.getDataRegistre() == null) {
+			jugador.setDataRegistre(LocalDateTime.now());
 		}
 		
 		List<Jugador> llistaJugadors = jugadorRepository.findAll();
@@ -36,5 +57,6 @@ public class JugadorServiceImpl implements JugadorService {
 		} 
 		return jugador;
 	}
+	*/
 
 }

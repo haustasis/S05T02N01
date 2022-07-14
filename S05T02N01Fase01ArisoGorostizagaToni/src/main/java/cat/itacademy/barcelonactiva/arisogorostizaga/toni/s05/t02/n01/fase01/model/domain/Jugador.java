@@ -1,5 +1,7 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.model.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,13 +22,13 @@ public class Jugador {
 	private String nomJugador;
 	
 	@Column(name = "dataRegistre")
-	private String dataRegistre;
+	private LocalDateTime dataRegistre;
 	
 	public Jugador() {
 		
 	}
 
-	public Jugador(Integer idJugador, String nomJugador, String dataRegistre) {
+	public Jugador(Integer idJugador, String nomJugador, LocalDateTime dataRegistre) {
 		super();
 		this.idJugador = idJugador;
 		this.nomJugador = nomJugador;
@@ -49,23 +51,12 @@ public class Jugador {
 		this.nomJugador = nomJugador;
 	}
 
-	public String getDataRegistre() {
+	public LocalDateTime getDataRegistre() {
 		return dataRegistre;
 	}
 
-	public void setDataRegistre(String dataRegistre) {
+	public void setDataRegistre(LocalDateTime dataRegistre) {
 		this.dataRegistre = dataRegistre;
 	}
-
-	@Override
-	public String toString() {
-		return "Jugador [idJugador=" + idJugador + ", nomJugador=" + nomJugador + ", dataRegistre=" + dataRegistre
-				+ ", getIdJugador()=" + getIdJugador() + ", getNomJugador()=" + getNomJugador() + ", getDataRegistre()="
-				+ getDataRegistre() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
-	}
-	
-	
-	
 
 }

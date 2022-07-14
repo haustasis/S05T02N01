@@ -7,4 +7,5 @@ public interface JugadorService {
 	public Jugador crearJugador(Jugador jugador);
 	public Jugador existeixNomJugador(Jugador jugador);
 
+
 }
