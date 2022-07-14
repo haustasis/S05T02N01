@@ -5,5 +5,6 @@ import cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.mod
 public interface JugadorService {
 	
 	public Jugador crearJugador(Jugador jugador);
+	public Jugador existeixNomJugador(Jugador jugador);
 
 }
