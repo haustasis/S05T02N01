@@ -48,6 +48,12 @@ public class JugadorServiceImpl implements JugadorService {
 		return jugadorRepository.save(jugador);
 	}
 
+	@Override
+	public void eliminarJugadorPerID(Integer idJugador) {
+		jugadorRepository.deleteById(idJugador);
+		
+	}
+
 
 
 
