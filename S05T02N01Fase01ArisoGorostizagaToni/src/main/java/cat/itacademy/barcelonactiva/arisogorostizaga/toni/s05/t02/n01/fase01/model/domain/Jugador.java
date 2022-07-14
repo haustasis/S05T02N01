@@ -24,6 +24,8 @@ public class Jugador {
 	@Column(name = "dataRegistre")
 	private LocalDateTime dataRegistre;
 	
+	
+	
 	public Jugador() {
 		
 	}
