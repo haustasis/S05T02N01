@@ -10,6 +10,7 @@ public interface JugadorService {
 	public Jugador existeixNomJugador(Jugador jugador);
 	public List<Jugador> llistaJugadors();
 	public Jugador obtenirJugadorPerID(Integer idJugador);
+	public Jugador modificarNomJugador(Jugador jugador);
 
 
 }

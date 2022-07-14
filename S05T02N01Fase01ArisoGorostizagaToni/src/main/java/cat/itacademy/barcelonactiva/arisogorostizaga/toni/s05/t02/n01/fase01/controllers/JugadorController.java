@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,18 @@ public class JugadorController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> obtenirJugadorPerID(@PathVariable(value = "id") Integer id) {
 		return ResponseEntity.status(HttpStatus.OK).body(jugadorService.obtenirJugadorPerID(id));
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> modificarNomJugador(@RequestBody Jugador jugador, @PathVariable(value = "id") Integer id){
+		Jugador jugadorPerModificar = jugadorService.obtenirJugadorPerID(id);
+		
+		if(jugadorPerModificar != null) {
+			jugadorPerModificar.setNomJugador(jugador.getNomJugador());
+			return ResponseEntity.status(HttpStatus.OK).body(jugadorService.modificarNomJugador(jugadorPerModificar));
+		} else {
+			return (ResponseEntity.status(HttpStatus.BAD_REQUEST)).body("Nom duplicat.");
+		}
 	}
 	
 	

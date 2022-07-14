@@ -43,6 +43,11 @@ public class JugadorServiceImpl implements JugadorService {
 		return jugadorRepository.findById(idJugador).orElse(null);
 	}
 
+	@Override
+	public Jugador modificarNomJugador(Jugador jugador) {
+		return jugadorRepository.save(jugador);
+	}
+
 
 
 
