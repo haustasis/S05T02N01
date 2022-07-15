@@ -3,6 +3,7 @@ package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.co
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,19 +29,17 @@ public class JocController {
 		Jugador jugador = jugadorService.obtenirJugadorPerID(id);
 		return ResponseEntity.status(HttpStatus.CREATED).body(jocService.tiradaDaus(jugador));
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<?> llistaJocsPerJugadorID(@PathVariable(value = "id") Integer id) {
-		return  ResponseEntity.status(HttpStatus.OK).body(jocService.llistaJocsPerJugadorID(id));
+		return ResponseEntity.status(HttpStatus.OK).body(jocService.llistaJocsPerJugadorID(id));
 	}
-	
-	public ResponseEntity<?> eliminarJocs (@PathVariable(value = "id") Integer id) {	
+
+	@DeleteMapping
+	public ResponseEntity<?> eliminarJocs(@PathVariable(value = "id") Integer id) {
 		Jugador jugador = jugadorService.obtenirJugadorPerID(id);
 		jocService.eliminarJocs(jugador);
 		return ResponseEntity.ok().build();
 	}
-	
-	
-	
 
 }

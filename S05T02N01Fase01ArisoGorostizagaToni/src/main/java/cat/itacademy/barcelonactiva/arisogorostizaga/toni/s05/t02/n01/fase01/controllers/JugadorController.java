@@ -1,6 +1,7 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.controllers;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,10 @@ public class JugadorController {
     }
 	
 	@GetMapping
-	public List<Jugador> llistaJugadors() {
-		return jugadorService.llistaJugadors();
-	}
+    public ResponseEntity<?> llistaJugadors(){
+        List<Jugador> jugadors = new ArrayList<>(jugadorService.llistaJugadors());
+        return ResponseEntity.ok(jugadors);
+    }
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> obtenirJugadorPerID(@PathVariable(value = "id") Integer id) {
