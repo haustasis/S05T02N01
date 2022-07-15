@@ -25,6 +25,7 @@ public class Jugador {
 	
 	@Column(name = "dataRegistre")
 	private LocalDateTime dataRegistre;
+
 	
 	@OneToMany(mappedBy = "jugador")
 	private List<Joc> jocs;
