@@ -18,8 +18,11 @@ public class JocServiceImpl implements JocService {
 	private JugadorRepository jugadorRepository;
 
 	@Override
-	public Joc tiradaDaus(Joc joc) {
+	public Joc tiradaDaus(Jugador jugador) {
+
+		Joc joc = new Joc(jugador);
 		return jocRepository.save(joc);
 	}
+
 
 }
