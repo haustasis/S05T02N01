@@ -26,6 +26,11 @@ public class Jugador {
 	@Column(name = "dataRegistre")
 	private LocalDateTime dataRegistre;
 
+	@Column(name = "guanyatTotal")
+	private int guanyatTotal; 
+	
+	@Column(name="guanyatPercent")
+	private double guanyatPercent;
 	
 	@OneToMany(mappedBy = "jugador")
 	private List<Joc> jocs;
@@ -65,6 +70,14 @@ public class Jugador {
 
 	public void setDataRegistre(LocalDateTime dataRegistre) {
 		this.dataRegistre = dataRegistre;
+	}
+	
+	public double guanyatPercent() {
+		
+		double resultat = ((double) this.guanyatTotal / (double) jocs.size()) * 100;
+		
+		return resultat;
+		
 	}
 
 }

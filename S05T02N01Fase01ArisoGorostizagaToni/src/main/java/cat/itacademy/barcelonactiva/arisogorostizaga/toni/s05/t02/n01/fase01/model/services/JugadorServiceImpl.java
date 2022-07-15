@@ -22,8 +22,8 @@ public class JugadorServiceImpl implements JugadorService {
 
 	@Override
 	public Jugador existeixNomJugador(Jugador jugador) {
-		List<Jugador>list=jugadorRepository.findAll();
-		for(Jugador p:list) {
+		List<Jugador> list = jugadorRepository.findAll();
+		for(Jugador p : list) {
 			if((p.getNomJugador().equalsIgnoreCase(jugador.getNomJugador())) || ((jugador.getNomJugador().equalsIgnoreCase("")))) {
 				jugador.setNomJugador("ANÒNIM");
 
