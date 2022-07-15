@@ -1,6 +1,5 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.controllers;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,48 +21,38 @@ import cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.mod
 @RestController
 @RequestMapping("/players")
 public class JugadorController {
-	
+
 	@Autowired
 	private JugadorService jugadorService;
-	
-	@PostMapping
-    public ResponseEntity<?> crearJugador(@RequestBody Jugador jugador){
 
+	@PostMapping
+	public ResponseEntity<?> crearJugador(@RequestBody Jugador jugador) {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(jugadorService.crearJugador(jugadorService.existeixNomJugador(jugador)));
-        
-    }
-	
+	}
+
 	@GetMapping
-    public ResponseEntity<?> llistaJugadors(){
-        List<Jugador> jugadors = new ArrayList<>(jugadorService.llistaJugadors());
-        return ResponseEntity.ok(jugadors);
-    }
-	
+	public ResponseEntity<?> llistaJugadors() {
+		List<Jugador> jugadors = new ArrayList<>(jugadorService.llistaJugadors());
+		return ResponseEntity.ok(jugadors);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<?> obtenirJugadorPerID(@PathVariable(value = "id") Integer id) {
 		return ResponseEntity.status(HttpStatus.OK).body(jugadorService.obtenirJugadorPerID(id));
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<?> modificarNomJugador(@RequestBody Jugador jugador, @PathVariable(value = "id") Integer id){
+	public ResponseEntity<?> modificarNomJugador(@RequestBody Jugador jugador, @PathVariable(value = "id") Integer id) {
 		Jugador jugadorPerModificar = jugadorService.obtenirJugadorPerID(id);
-		
-		if(jugadorPerModificar != null) {
-			jugadorPerModificar.setNomJugador(jugador.getNomJugador());
-			return ResponseEntity.status(HttpStatus.OK).body(jugadorService.modificarNomJugador(jugadorPerModificar));
-		} else {
-			return (ResponseEntity.status(HttpStatus.BAD_REQUEST)).body("Nom duplicat.");
-		}
+		jugadorPerModificar.setNomJugador(jugador.getNomJugador());
+		return ResponseEntity.status(HttpStatus.OK).body(jugadorService.modificarNomJugador(jugadorPerModificar));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> eliminarJugadorPerID(@PathVariable("id") Integer id) {
 		jugadorService.eliminarJugadorPerID(id);
-		return new ResponseEntity<>("Jugador eliminat",HttpStatus.OK);
-				
+		return new ResponseEntity<>("Jugador eliminat", HttpStatus.OK);
 	}
-	
-	
 
 }
