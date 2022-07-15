@@ -30,8 +30,14 @@ public class JocController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> llistaJocsPerJugadorID(@PathVariable(value = "id") Integer id){
+	public ResponseEntity<?> llistaJocsPerJugadorID(@PathVariable(value = "id") Integer id) {
 		return  ResponseEntity.status(HttpStatus.OK).body(jocService.llistaJocsPerJugadorID(id));
+	}
+	
+	public ResponseEntity<?> eliminarJocs (@PathVariable(value = "id") Integer id) {	
+		Jugador jugador = jugadorService.obtenirJugadorPerID(id);
+		jocService.eliminarJocs(jugador);
+		return ResponseEntity.ok().build();
 	}
 	
 	
