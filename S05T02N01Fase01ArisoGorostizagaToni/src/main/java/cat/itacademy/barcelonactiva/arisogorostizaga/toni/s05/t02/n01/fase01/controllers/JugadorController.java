@@ -1,7 +1,6 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.controllers;
 
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +27,10 @@ public class JugadorController {
 	
 	@PostMapping
     public ResponseEntity<?> crearJugador(@RequestBody Jugador jugador){
-        if (jugador.getNomJugador()==null)
-            jugador.setNomJugador("ANÒNIM");
 
-        jugador.setDataRegistre(LocalDateTime.now());
-        jugadorService.crearJugador(jugador);
-        return ResponseEntity.status(HttpStatus.CREATED)
-				.body(jugadorService.crearJugador((jugador)));
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(jugadorService.crearJugador(jugadorService.existeixNomJugador(jugador)));
+        
     }
 	
 	@GetMapping
