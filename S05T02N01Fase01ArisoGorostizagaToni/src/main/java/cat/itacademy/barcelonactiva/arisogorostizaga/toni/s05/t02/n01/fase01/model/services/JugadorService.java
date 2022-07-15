@@ -13,5 +13,4 @@ public interface JugadorService {
 	public Jugador modificarNomJugador(Jugador jugador);
 	public void eliminarJugadorPerID(Integer idJugador);
 
-
 }
