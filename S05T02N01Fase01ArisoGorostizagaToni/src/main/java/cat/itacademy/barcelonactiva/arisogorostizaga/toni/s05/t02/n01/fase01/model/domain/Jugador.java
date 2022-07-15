@@ -72,6 +72,15 @@ public class Jugador {
 		this.dataRegistre = dataRegistre;
 	}
 	
+	
+	public List<Joc> getJocs() {
+		return jocs;
+	}
+
+	public void setJocs(List<Joc> jocs) {
+		this.jocs = jocs;
+	}
+
 	public double guanyatPercent() {
 		
 		double resultat = ((double) this.guanyatTotal / (double) jocs.size()) * 100;

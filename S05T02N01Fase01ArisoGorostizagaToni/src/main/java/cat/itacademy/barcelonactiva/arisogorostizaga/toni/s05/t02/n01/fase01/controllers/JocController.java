@@ -23,8 +23,8 @@ public class JocController {
 	JugadorService jugadorService;
 	
 	@PostMapping
-	 public ResponseEntity<?> crearJoc(@PathVariable(value="id") Integer idJugador) {
-	      Jugador jugador= jugadorService.obtenirJugadorPerID(idJugador);
+	 public ResponseEntity<?> crearJoc(@PathVariable(value="id") Integer id) {
+	      Jugador jugador= jugadorService.obtenirJugadorPerID(id);
 	       return ResponseEntity.status(HttpStatus.CREATED).body(jocService.tiradaDaus(jugador));
 	   }
 	

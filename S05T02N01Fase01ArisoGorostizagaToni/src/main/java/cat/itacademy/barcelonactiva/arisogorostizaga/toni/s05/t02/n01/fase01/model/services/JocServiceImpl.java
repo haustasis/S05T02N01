@@ -1,5 +1,8 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.model.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,13 @@ public class JocServiceImpl implements JocService {
 
 		Joc joc = new Joc(jugador);
 		return jocRepository.save(joc);
+	}
+
+	@Override
+	public List<Joc> llistaJocsPerJugadorID(int idJugador) {
+		Optional<Jugador> op = jugadorRepository.findById(idJugador);
+		Jugador jugador = op.get();
+		return jugador.getJocs();
 	}
 
 
