@@ -1,12 +1,14 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.model.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +26,8 @@ public class Jugador {
 	@Column(name = "dataRegistre")
 	private LocalDateTime dataRegistre;
 	
-	
-	
+	@OneToMany(mappedBy = "jugador")
+	private List<Joc> jocs;
 	
 	
 	
