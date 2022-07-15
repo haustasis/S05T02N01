@@ -1,5 +1,7 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.model.domain;
 
+import java.util.Random;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,18 +34,24 @@ public class Joc {
 	@JoinColumn(name = "jugador_idJugador")
 	private Jugador jugador;
 
-	public Joc() {
-		
-	}
 
-	public Joc(int idJoc, int dau1, int dau2, boolean guanyat, Jugador jugador) {
-		super();
-		this.idJoc = idJoc;
-		this.dau1 = dau1;
-		this.dau2 = dau2;
-		this.guanyat = guanyat;
+	public Joc(Jugador jugador) {
+		this.dau1 = getRandomDaus();
+		this.dau2 = getRandomDaus();
+		this.guanyat = suma7();
 		this.jugador = jugador;
 	}
+	
+    public int getRandomDaus(){
+    	Random random = new Random();
+        return random.nextInt(6) + 1;
+    }
+    
+    public boolean suma7() {
+    	return (this.dau1 + this.dau2 == 7) ? true : false; 
+    }
+    
+    
 
 	public int getIdJoc() {
 		return idJoc;
