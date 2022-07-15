@@ -34,5 +34,11 @@ public class JocServiceImpl implements JocService {
 		return jugador.getJocs();
 	}
 
+	@Override
+	public void eliminarJocs(Jugador jugador) {
+		jocRepository.deleteAll(jugador.getJocs());
+		
+	}
+
 
 }

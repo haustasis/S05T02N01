@@ -11,5 +11,7 @@ public interface JocService {
 	
 	public Joc tiradaDaus(Jugador jugador);
 	public List<Joc> llistaJocsPerJugadorID(int idJugador);
+	public void eliminarJocs(Jugador jugador);
+	
 
 }
