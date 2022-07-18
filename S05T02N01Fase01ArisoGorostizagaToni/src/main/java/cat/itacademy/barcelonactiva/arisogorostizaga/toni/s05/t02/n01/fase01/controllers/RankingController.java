@@ -34,5 +34,4 @@ public class RankingController {
 		return ResponseEntity.status(HttpStatus.OK).body(rankingService.pitjorJugadorGuanyatPercent());
 	}
 	
-	
 }
