@@ -80,13 +80,49 @@ public class Jugador {
 	public void setJocs(List<Joc> jocs) {
 		this.jocs = jocs;
 	}
+	
+
+	public int getGuanyatTotal() {
+		
+		return guanyatTotal;
+	}
+
+	public void setGuanyatTotal(int guanyatTotal) {
+		this.guanyatTotal = guanyatTotal;
+	}
+
+	public double getGuanyatPercent() {
+		guanyatPercent = guanyatPercent();
+		return guanyatPercent;
+	}
+
+	public void setGuanyatPercent(double guanyatPercent) {
+		this.guanyatPercent = guanyatPercent;
+	}
 
 	public double guanyatPercent() {
 		
 		double resultat = ((double) this.guanyatTotal / (double) jocs.size()) * 100;
 		
+		
 		return resultat;
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Jugador [idJugador=" + idJugador + ", nomJugador=" + nomJugador + ", dataRegistre=" + dataRegistre
+				+ ", guanyatTotal=" + guanyatTotal + ", guanyatPercent=" + guanyatPercent + ", jocs=" + jocs
+				+ ", getIdJugador()=" + getIdJugador() + ", getNomJugador()=" + getNomJugador() + ", getDataRegistre()="
+				+ getDataRegistre() + ", getJocs()=" + getJocs() + ", getGuanyatTotal()=" + getGuanyatTotal()
+				+ ", getGuanyatPercent()=" + getGuanyatPercent() + ", guanyatPercent()=" + guanyatPercent()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
+	
+
+	
+	
 
 }

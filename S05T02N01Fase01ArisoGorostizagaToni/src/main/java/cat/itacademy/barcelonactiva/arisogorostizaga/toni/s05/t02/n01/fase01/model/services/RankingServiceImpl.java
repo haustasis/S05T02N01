@@ -1,5 +1,6 @@
 package cat.itacademy.barcelonactiva.arisogorostizaga.toni.s05.t02.n01.fase01.model.services;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +15,27 @@ public class RankingServiceImpl implements RankingService {
 
 	@Override
 	public Jugador millorJugadorGuanyatPercent() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Jugador> jugadors = jugadorRepository.findAll();
+		jugadors.sort(Comparator.comparing(Jugador::getGuanyatPercent));
+		
+		return jugadors.get(0);
 	}
 
 	@Override
 	public Jugador pitjorJugadorGuanyatPercent() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Jugador> jugadors = jugadorRepository.findAll();
+		jugadors.sort(Comparator.comparing(Jugador::getGuanyatPercent));
+		
+		return jugadors.get(jugadors.size() - 1);
 	}
 
 	@Override
 	public List<Jugador> llistaJugadorsGuanyatPercent() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Jugador> jugadors = jugadorRepository.findAll();
+		jugadors.sort(Comparator.comparing(Jugador::getGuanyatPercent));
+		
+		return jugadors;
 	}
 
 }
