@@ -3,38 +3,26 @@ package cat.itacademy.barcelonactiva.ariso.toni.s05.t02.n01.fase02.model.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "jugadors")
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+@Document(collection="jugadros")
 public class Jugador {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "idJugador")
+	@MongoId(targetType = FieldType.OBJECT_ID)
 	private Integer idJugador;
 	
-	@Column(name = "nomJugador")
-	private String nomJugador;
-	
-	@Column(name = "dataRegistre")
+	private String nomJugador;	
+
 	private LocalDateTime dataRegistre;
 
-	@Column(name = "guanyatTotal")
 	private int guanyatTotal; 
 	
-	@Column(name="guanyatPercent")
 	private double guanyatPercent;
 	
-	@OneToMany(mappedBy = "jugador")
 	private List<Joc> jocs;
-	
 	
 	
 	public Jugador() {

@@ -2,36 +2,23 @@ package cat.itacademy.barcelonactiva.ariso.toni.s05.t02.n01.fase02.model.domain;
 
 import java.util.Random;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Entity
-@Table(name = "jocs")
+
+@Document(collection="jocs")
 public class Joc {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "idJoc")
+	@MongoId(targetType = FieldType.OBJECT_ID)
 	private int idJoc;
 	
-	@Column(name = "dau1")
 	private int dau1;
 	
-	@Column(name = "dau2")
 	private int dau2;
 	
-	@Column(name = "guanyat")
 	private boolean guanyat;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "jugador_idJugador")
 	private Jugador jugador;
 
 
