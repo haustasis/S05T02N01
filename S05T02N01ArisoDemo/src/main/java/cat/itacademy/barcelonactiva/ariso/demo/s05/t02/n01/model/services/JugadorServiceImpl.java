@@ -1,13 +1,15 @@
 package cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.exceptions.CustomException;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.domain.Jugador;
+import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.dto.JugadorDTO;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.repository.JugadorRepository;
 
 @Service
@@ -17,43 +19,94 @@ public class JugadorServiceImpl implements JugadorService {
 	private JugadorRepository jugadorRepository;
 
 	@Override
-	public Jugador crearJugador(Jugador jugador) {
-		if (jugador.getNombre() == null || jugador.getNombre().equals("")
-				|| jugador.getNombre().equalsIgnoreCase("ANONIM")) {
-			jugador.setNombre("ANONIM");
+	public JugadorDTO crearJugador(JugadorDTO jugadorDTO) {
 
-		} else if (jugadorExiste(jugador)) {
+		if (jugadorDTO.getNombre() == null || jugadorDTO.getNombre().equals("")
+				|| jugadorDTO.getNombre().equalsIgnoreCase("ANONIM")) {
+			jugadorDTO.setNombre("ANONIM");
+
+		} else if (jugadorExiste(jugadorDTO)) {
 			throw new CustomException("El jugador ya existe con este nombre.");
 		}
-		jugador.setFechaRegistro(LocalDate.now());
-		return jugadorRepository.save(jugador);
+
+		jugadorDTO.setFechaRegistro(LocalDateTime.now());
+
+		Jugador jugador = mapearEntity(jugadorDTO);
+		Jugador nuevoJugador = jugadorRepository.save(jugador);
+
+		JugadorDTO jugadorRespuesta = mapearDTO(nuevoJugador);
+
+		return jugadorRespuesta;
+
 	}
 
-	public boolean jugadorExiste(Jugador jugador) {
+	public boolean jugadorExiste(JugadorDTO jugadorDTO) {
 		boolean existe = false;
-
-		List<Jugador> jugadores = jugadorRepository.findByNombre(jugador.getNombre());
-
+		List<Jugador> jugadores = jugadorRepository.findByNombre(jugadorDTO.getNombre());
 		if (jugadores.size() > 0) {
 			existe = true;
 		}
-
 		return existe;
 	}
 
 	@Override
-	public Jugador actualizarJugador(Jugador jugador, long id) {
-		Jugador jugadorActualizado = jugadorRepository.findById(id)
-				.orElseThrow(() -> new CustomException("No existe el jugador."));
+	public List<JugadorDTO> obtenerJugadores() {
+		List<Jugador> jugadores = jugadorRepository.findAll();
+		return jugadores.stream().map(jugador -> mapearDTO(jugador)).collect(Collectors.toList());
+	}
 
-		jugadorActualizado.setNombre(jugador.getNombre());
+	// Convertir Entity a DTO -- Response DB
+	private JugadorDTO mapearDTO(Jugador jugador) {
+		JugadorDTO jugadorDTO = new JugadorDTO();
+		jugadorDTO.setId(jugador.getId());
+		jugadorDTO.setNombre(jugador.getNombre());
+		jugadorDTO.setFechaRegistro(jugador.getFechaRegistro());
 
-		if (jugadorActualizado.getNombre() == null || jugadorActualizado.getNombre().equals("")) {
+		return jugadorDTO;
+	}
+
+	// Convertir DTO a Entity -- Request Front
+	private Jugador mapearEntity(JugadorDTO jugadorDTO) {
+		Jugador jugador = new Jugador();
+		jugador.setId(jugadorDTO.getId());
+		jugador.setNombre(jugadorDTO.getNombre());
+		jugador.setFechaRegistro(jugadorDTO.getFechaRegistro());
+
+		return jugador;
+	}
+
+	@Override
+	public JugadorDTO obtenerJugadorPorId(long id) {
+		Jugador jugador = jugadorRepository.findById(id)
+				.orElseThrow(() -> new CustomException("Jugador no existe con este id."));
+		return mapearDTO(jugador);
+	}
+
+	@Override
+	public JugadorDTO actualizarJugador(JugadorDTO jugadorDTO, long id) {
+		Jugador jugador = jugadorRepository.findById(id)
+				.orElseThrow(() -> new CustomException("Jugador no existe con este id."));
+
+		if (jugadorDTO.getNombre() == null || jugadorDTO.getNombre().equals("")) {
 			throw new CustomException("Elija otro nombre.");
-		} else if (jugadorExiste(jugadorActualizado) && !jugadorActualizado.getNombre().equalsIgnoreCase("ANONIM")) {
+		} else if (jugadorExiste(jugadorDTO) && !jugadorDTO.getNombre().equalsIgnoreCase("ANONIM")) {
 			throw new CustomException("Elija otro nombre.");
 		}
-		return jugadorRepository.save(jugador);
+
+		jugador.setNombre(jugadorDTO.getNombre());
+
+		Jugador jugadorActualizado = jugadorRepository.save(jugador);
+
+		return mapearDTO(jugadorActualizado);
+
+	}
+
+	@Override
+	public void eliminarJugador(long id) {
+		Jugador jugador = jugadorRepository.findById(id)
+				.orElseThrow(() -> new CustomException("Jugador no existe con este id."));
+		jugadorRepository.delete(jugador);
+
 	}
 
 }

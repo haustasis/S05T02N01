@@ -1,8 +1,12 @@
 package cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -10,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.domain.Jugador;
+import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.dto.JugadorDTO;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.services.JugadorService;
 
 @RestController
@@ -21,23 +25,33 @@ public class JugadorController {
 	private JugadorService jugadorService;
 
 	@PostMapping
-	public ResponseEntity<?> crearJugador(@RequestBody Jugador jugador) {
-		try {
-			jugadorService.crearJugador(jugador);
-			return new ResponseEntity<>("Jugador creado.", HttpStatus.CREATED);
-		} catch (Exception ex) {
-			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<JugadorDTO> crearJugador(@RequestBody JugadorDTO jugadorDTO) {
+
+		return new ResponseEntity<>(jugadorService.crearJugador(jugadorDTO), HttpStatus.CREATED);
+	}
+
+	@GetMapping
+	public List<JugadorDTO> obtenerJugadores() {
+		return jugadorService.obtenerJugadores();
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<JugadorDTO> obtenerJugadorPorId(@PathVariable(name = "id") long id) {
+		return ResponseEntity.ok(jugadorService.obtenerJugadorPorId(id));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> actualizarJugador(@RequestBody Jugador jugador, @PathVariable(name = "id") long id) {
-		try {
-			jugadorService.actualizarJugador(jugador, id);
-			return new ResponseEntity<>("Jugador actualizado.", HttpStatus.CREATED);
-		} catch (Exception ex) {
-			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<JugadorDTO> actualizarJugador(@RequestBody JugadorDTO jugadorDTO,
+			@PathVariable(name = "id") long id) {
+		JugadorDTO jugadorRespuesta = jugadorService.actualizarJugador(jugadorDTO, id);
+		return new ResponseEntity<>(jugadorRespuesta, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> eliminarJugador(@PathVariable(name = "id") long id) {
+		jugadorService.eliminarJugador(id);
+
+		return new ResponseEntity<>("Jugador eliminado.", HttpStatus.OK);
 	}
 
 }

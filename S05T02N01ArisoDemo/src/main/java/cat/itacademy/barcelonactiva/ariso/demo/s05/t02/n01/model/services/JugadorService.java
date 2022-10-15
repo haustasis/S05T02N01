@@ -1,10 +1,18 @@
 package cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.services;
 
-import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.domain.Jugador;
+import java.util.List;
+
+import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.dto.JugadorDTO;
 
 public interface JugadorService {
 
-	public Jugador crearJugador(Jugador jugador);
+	public JugadorDTO crearJugador(JugadorDTO jugadorDTO);
 
-	public Jugador actualizarJugador(Jugador jugador, long id);
+	public List<JugadorDTO> obtenerJugadores();
+
+	public JugadorDTO obtenerJugadorPorId(long id);
+
+	public JugadorDTO actualizarJugador(JugadorDTO jugadorDTO, long id);
+
+	public void eliminarJugador(long id);
 }

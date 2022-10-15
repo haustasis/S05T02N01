@@ -1,0 +1,54 @@
+package cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "jugadas")
+public class Jugada {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@Column(name = "dado1")
+	private int dado1;
+
+	@Column(name = "dado2")
+	private int dado2;
+
+	@Column(name = "ganada")
+	private boolean ganada;
+
+	/*
+	
+	@Column(name = "ganadasTotal")
+	private double ganadasTotal;
+
+	@Column(name = "jugadasTotal")
+	private double jugadasTotal;
+
+	@Column(name = "porcentajeGanadas")
+	private double porcentajeGanadas;
+*/
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "jugador_id", nullable = false)
+	private Jugador jugador;
+
+}
