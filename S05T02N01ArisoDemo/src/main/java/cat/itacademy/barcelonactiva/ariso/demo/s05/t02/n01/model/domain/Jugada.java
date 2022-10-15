@@ -29,15 +29,10 @@ public class Jugada {
 	private int dado1;
 	private int dado2;
 	private int ganada;
+//	private double ganadasTotal;
+//	private double jugadasTotal;
+//	private double porcentajeGanadas;
 
-	/*
-	 * 
-	 * @Column(name = "ganadasTotal") private double ganadasTotal;
-	 * 
-	 * @Column(name = "jugadasTotal") private double jugadasTotal;
-	 * 
-	 * @Column(name = "porcentajeGanadas") private double porcentajeGanadas;
-	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "jugador_id", nullable = false)
 	private Jugador jugador;
