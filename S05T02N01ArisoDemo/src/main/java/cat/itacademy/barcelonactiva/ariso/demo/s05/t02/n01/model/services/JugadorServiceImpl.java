@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.exceptions.NombreExisteException;
+import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.exceptions.CustomException;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.domain.Jugador;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.repository.JugadorRepository;
 
@@ -21,8 +21,9 @@ public class JugadorServiceImpl implements JugadorService {
 		if (jugador.getNombre() == null || jugador.getNombre().equals("")
 				|| jugador.getNombre().equalsIgnoreCase("ANONIM")) {
 			jugador.setNombre("ANONIM");
+
 		} else if (jugadorExiste(jugador)) {
-			throw new NombreExisteException("El jugador ya existe con este nombre.");
+			throw new CustomException("El jugador ya existe con este nombre.");
 		}
 		jugador.setFechaRegistro(LocalDate.now());
 		return jugadorRepository.save(jugador);
@@ -38,6 +39,15 @@ public class JugadorServiceImpl implements JugadorService {
 		}
 
 		return existe;
+	}
+
+	@Override
+	public Jugador actualizarJugador(Jugador jugador, long id) {
+		Jugador jugadorActualizado = jugadorRepository.findById(id)
+				.orElseThrow(() -> new CustomException("Error al actualizar el jugador."));
+
+		jugadorActualizado.setNombre(jugador.getNombre());
+		return jugadorRepository.save(jugador);
 	}
 
 }
