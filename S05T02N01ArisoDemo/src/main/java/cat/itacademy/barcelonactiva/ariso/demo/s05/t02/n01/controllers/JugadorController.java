@@ -1,7 +1,5 @@
 package cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +29,15 @@ public class JugadorController {
 	}
 
 	@GetMapping
-	public List<JugadorDTO> obtenerJugadores() {
-		return jugadorService.obtenerJugadores();
+	public ResponseEntity<?> obtenerJugadores() {
+		jugadorService.obtenerJugadoresPorcentaje();
+		return new ResponseEntity<>(jugadorService.obtenerJugadoresPorcentaje(), HttpStatus.OK);
 	}
+
+//	@GetMapping
+//	public List<JugadorDTO> obtenerJugadores() {
+//		return jugadorService.obtenerJugadores();
+//	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<JugadorDTO> obtenerJugadorPorId(@PathVariable(name = "id") long id) {

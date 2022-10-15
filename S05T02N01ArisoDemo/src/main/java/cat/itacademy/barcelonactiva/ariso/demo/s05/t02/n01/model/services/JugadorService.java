@@ -10,6 +10,8 @@ public interface JugadorService {
 
 	public List<JugadorDTO> obtenerJugadores();
 
+	public List<JugadorDTO> obtenerJugadoresPorcentaje();
+
 	public JugadorDTO obtenerJugadorPorId(long id);
 
 	public JugadorDTO actualizarJugador(JugadorDTO jugadorDTO, long id);

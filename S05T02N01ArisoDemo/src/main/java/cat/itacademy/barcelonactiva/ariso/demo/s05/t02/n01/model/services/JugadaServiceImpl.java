@@ -88,4 +88,9 @@ public class JugadaServiceImpl implements JugadaService {
 
 	}
 
+	@Override
+	public List<Jugada> obtenerJugadas() {
+		return jugadaRepository.findAll();
+	}
+
 }
