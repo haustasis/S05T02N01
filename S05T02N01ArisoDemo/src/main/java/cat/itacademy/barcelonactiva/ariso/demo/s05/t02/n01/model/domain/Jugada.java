@@ -1,6 +1,5 @@
 package cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.model.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,26 +26,18 @@ public class Jugada {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "dado1")
 	private int dado1;
-
-	@Column(name = "dado2")
 	private int dado2;
-
-	@Column(name = "ganada")
-	private boolean ganada;
+	private int ganada;
 
 	/*
-	
-	@Column(name = "ganadasTotal")
-	private double ganadasTotal;
-
-	@Column(name = "jugadasTotal")
-	private double jugadasTotal;
-
-	@Column(name = "porcentajeGanadas")
-	private double porcentajeGanadas;
-*/
+	 * 
+	 * @Column(name = "ganadasTotal") private double ganadasTotal;
+	 * 
+	 * @Column(name = "jugadasTotal") private double jugadasTotal;
+	 * 
+	 * @Column(name = "porcentajeGanadas") private double porcentajeGanadas;
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "jugador_id", nullable = false)
 	private Jugador jugador;
