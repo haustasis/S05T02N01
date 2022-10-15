@@ -44,9 +44,15 @@ public class JugadorServiceImpl implements JugadorService {
 	@Override
 	public Jugador actualizarJugador(Jugador jugador, long id) {
 		Jugador jugadorActualizado = jugadorRepository.findById(id)
-				.orElseThrow(() -> new CustomException("Error al actualizar el jugador."));
+				.orElseThrow(() -> new CustomException("No existe el jugador."));
 
 		jugadorActualizado.setNombre(jugador.getNombre());
+
+		if (jugadorActualizado.getNombre() == null || jugadorActualizado.getNombre().equals("")) {
+			throw new CustomException("Elija otro nombre.");
+		} else if (jugadorExiste(jugadorActualizado) && !jugadorActualizado.getNombre().equalsIgnoreCase("ANONIM")) {
+			throw new CustomException("Elija otro nombre.");
+		}
 		return jugadorRepository.save(jugador);
 	}
 

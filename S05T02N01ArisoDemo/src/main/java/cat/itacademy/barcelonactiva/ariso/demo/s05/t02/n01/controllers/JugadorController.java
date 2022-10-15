@@ -34,7 +34,7 @@ public class JugadorController {
 	public ResponseEntity<?> actualizarJugador(@RequestBody Jugador jugador, @PathVariable(name = "id") long id) {
 		try {
 			jugadorService.actualizarJugador(jugador, id);
-			return new ResponseEntity<>("Jugador creado.", HttpStatus.CREATED);
+			return new ResponseEntity<>("Jugador actualizado.", HttpStatus.CREATED);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
