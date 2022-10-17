@@ -15,7 +15,5 @@ public class JugadaDTO {
 	private int dado1;
 	private int dado2;
 	private int ganada;
-//	private double ganadasTotal;
-//	private double jugadasTotal;
-//	private double porcentajeGanadas;
+
 }

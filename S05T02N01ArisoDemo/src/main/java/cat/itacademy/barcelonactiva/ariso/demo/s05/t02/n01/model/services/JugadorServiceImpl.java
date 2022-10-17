@@ -60,7 +60,6 @@ public class JugadorServiceImpl implements JugadorService {
 		return jugadores.stream().map(jugador -> mapearDTO(jugador)).collect(Collectors.toList());
 	}
 
-	// Convertir Entity a DTO -- Response DB
 	private JugadorDTO mapearDTO(Jugador jugador) {
 		JugadorDTO jugadorDTO = new JugadorDTO();
 		jugadorDTO.setId(jugador.getId());
@@ -70,7 +69,6 @@ public class JugadorServiceImpl implements JugadorService {
 		return jugadorDTO;
 	}
 
-	// Convertir DTO a Entity -- Request Front
 	private Jugador mapearEntity(JugadorDTO jugadorDTO) {
 		Jugador jugador = new Jugador();
 		jugador.setId(jugadorDTO.getId());
@@ -117,13 +115,10 @@ public class JugadorServiceImpl implements JugadorService {
 	@Override
 	public List<JugadorDTO> obtenerJugadoresPorcentaje() {
 
-		// LLISTAT DE JUGADORS DTO
 		List<JugadorDTO> jugadoresDTO = obtenerJugadores();
 
-		// LLISTAT DE JUGADES DEL SISTEMA
 		List<Jugada> jugadasDAO = jugadaService.obtenerJugadas();
 
-		// LLISTAT DE JUGADES D'UN JUGADOR
 		List<Jugada> jugadasJugador = new ArrayList<>();
 
 		int contador = 0;

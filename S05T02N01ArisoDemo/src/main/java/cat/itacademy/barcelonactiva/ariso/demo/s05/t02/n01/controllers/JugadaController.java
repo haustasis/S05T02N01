@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,12 +29,14 @@ public class JugadaController {
 		return jugadaService.obtenerJugadasPorJugadorId(jugadorId);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/{jugadorId}/games")
 	public ResponseEntity<JugadaDTO> crearJugada(@PathVariable(value = "jugadorId") long jugadorId,
 			@RequestBody JugadaDTO jugadaDTO) {
 		return new ResponseEntity<>(jugadaService.crearJugada(jugadorId, jugadaDTO), HttpStatus.CREATED);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{jugadorId}/games")
 	public ResponseEntity<String> eliminarJugadasPorJugadorId(@PathVariable(value = "jugadorId") long jugadorId) {
 		jugadaService.eliminarJugadasPorJugadorId(jugadorId);

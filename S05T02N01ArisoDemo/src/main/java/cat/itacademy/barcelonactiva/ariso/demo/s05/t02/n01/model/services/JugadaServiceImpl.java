@@ -36,14 +36,8 @@ public class JugadaServiceImpl implements JugadaService {
 
 		if ((nuevaJugada.getDado1() + nuevaJugada.getDado2()) == 7) {
 			nuevaJugada.setGanada(1);
-//			nuevaJugada.setJugadasTotal(jugada.getJugadasTotal() + 1);
-//			nuevaJugada.setGanadasTotal(jugada.getGanadasTotal() + 1);
-//			nuevaJugada.setPorcentajeGanadas((jugada.getGanadasTotal() + 1) / (jugada.getJugadasTotal() + 1));
 		} else {
 			nuevaJugada.setGanada(0);
-//			nuevaJugada.setJugadasTotal(jugada.getJugadasTotal() + 1);
-//			nuevaJugada.setGanadasTotal(jugada.getGanadasTotal());
-//			nuevaJugada.setPorcentajeGanadas((jugada.getGanadasTotal()) / (jugada.getJugadasTotal() + 1));
 		}
 
 		nuevaJugada = jugadaRepository.save(jugada);
@@ -56,9 +50,6 @@ public class JugadaServiceImpl implements JugadaService {
 		jugadaDTO.setDado1(jugada.getDado1());
 		jugadaDTO.setDado2(jugada.getDado2());
 		jugadaDTO.setGanada(jugada.getGanada());
-//		jugadaDTO.setGanadasTotal(jugada.getGanadasTotal());
-//		jugadaDTO.setJugadasTotal(jugada.getJugadasTotal());
-//		jugadaDTO.setPorcentajeGanadas(jugada.getPorcentajeGanadas());
 
 		return jugadaDTO;
 	}
@@ -69,9 +60,7 @@ public class JugadaServiceImpl implements JugadaService {
 		jugada.setDado1(jugadaDTO.getDado1());
 		jugada.setDado2(jugadaDTO.getDado2());
 		jugada.setGanada(jugadaDTO.getGanada());
-//		jugada.setGanadasTotal(jugadaDTO.getGanadasTotal());
-//		jugada.setJugadasTotal(jugadaDTO.getJugadasTotal());
-//		jugada.setPorcentajeGanadas(jugadaDTO.getPorcentajeGanadas());
+
 		return jugada;
 	}
 

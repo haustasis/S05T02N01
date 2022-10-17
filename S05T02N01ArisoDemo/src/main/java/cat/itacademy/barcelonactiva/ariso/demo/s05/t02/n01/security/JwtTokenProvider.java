@@ -35,13 +35,11 @@ public class JwtTokenProvider {
 		return token;
 	}
 
-	// get username from the token
 	public String getUsernameFromJWT(String token) {
 		Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
 		return claims.getSubject();
 	}
 
-	// validate JWT token
 	public boolean validateToken(String token) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);

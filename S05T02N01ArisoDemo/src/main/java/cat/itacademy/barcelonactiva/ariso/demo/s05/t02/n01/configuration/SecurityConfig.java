@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.security.CustomUserDetailsService;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.security.JwtAuthenticationEntryPoint;
 import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.security.JwtAuthenticationFilter;
 
@@ -23,9 +22,6 @@ import cat.itacademy.barcelonactiva.ariso.demo.s05.t02.n01.security.JwtAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-
-	@Autowired
-	private CustomUserDetailsService userDetailsService;
 
 	@Autowired
 	private JwtAuthenticationEntryPoint authenticationEntryPoint;
